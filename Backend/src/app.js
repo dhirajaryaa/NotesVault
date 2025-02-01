@@ -13,3 +13,7 @@ app.use(express.static('public'));
 
 app.use(express.urlencoded({ extended: true }));
 
+// routes definition: 
+import { notesRoutes } from './routes/note.route.js';
+
+app.use("/api/v1/notes",notesRoutes);
