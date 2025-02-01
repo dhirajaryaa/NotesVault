@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const notesSchema = new mongoose.Schema(
   {
@@ -36,5 +37,15 @@ const notesSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+notesSchema.pre("save", async function (next) {
+  if (!this.isModified) return null;
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
+
+notesSchema.methods.isPasswordCorrect = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
 
 export const Note = mongoose.model("Note", notesSchema);
