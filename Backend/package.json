@@ -1,0 +1,26 @@
+{
+  "name": "NotesVault-backend",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon run src/index.js"
+  },
+  "keywords": [
+    "Node.js",
+    "Express.js",
+    "MongoDB"
+  ],
+  "author": "Dhiraj Arya",
+  "license": "ISC",
+  "description": "A backend server for NotesVault [NotesVault is secure notes app with advance features] application",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
