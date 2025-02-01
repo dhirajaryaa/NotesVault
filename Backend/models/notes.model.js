@@ -26,7 +26,7 @@ const notesSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    sharedLink: {
+    sharedId: {
       type: String,
       default: "",
     },
