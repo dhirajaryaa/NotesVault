@@ -72,4 +72,17 @@ const updateNote = AsyncHandler(async(req,res)=>{
 
 });
 
-export { createNotes, getNote,updateNote };
+//delete notes
+const deleteNote = AsyncHandler(async(req,res)=>{
+  const { noteId } = req.params;
+  
+  if (!noteId) {
+    throw new ApiError(400, "Invalid Notes Id");
+  };
+
+  await Note.findByIdAndDelete(noteId);
+
+  return res.status(200).json(new ApiResponse(200, null, "Note deleted successfully"));
+});
+
+export { createNotes, getNote,updateNote,deleteNote };
