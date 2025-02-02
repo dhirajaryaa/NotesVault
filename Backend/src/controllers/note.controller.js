@@ -43,4 +43,33 @@ const getNote = AsyncHandler(async (req, res) => {
     .json(new ApiResponse(200, data, "Successfully notes fetched"));
 });
 
-export { createNotes, getNote };
+// update notes
+const updateNote = AsyncHandler(async(req,res)=>{
+  const { noteId } = req.params;
+  const {title, content, isSecure, tags, sharedLink} = req.body;
+  
+  if (!noteId) {
+    throw new ApiError(400, "Invalid Notes Id");
+  };
+  
+  if ([title, content, isSecure].some((item) => item === "")) {
+    throw new ApiError(400, "All fields are required");
+  };
+
+  const note = await Note.findByIdAndUpdate(noteId, {
+    title,
+    content,
+    isSecure,
+    tags: tags || [],
+    sharedLink: sharedLink || nanoid(10),
+    }, { new: true }).select("-password -viewCount");
+
+    if (!note) {
+    throw new ApiError(404, "Note not found");
+    }
+
+    return res.status(200).json(new ApiResponse(200, note, "Note updated successfully"));
+
+});
+
+export { createNotes, getNote,updateNote };

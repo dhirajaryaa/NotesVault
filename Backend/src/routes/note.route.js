@@ -1,5 +1,5 @@
 import express from 'express';
-import { createNotes, getNote } from '../controllers/note.controller.js';
+import { createNotes, getNote, updateNote } from '../controllers/note.controller.js';
 
 export const notesRoutes = express.Router();
 
@@ -7,3 +7,5 @@ export const notesRoutes = express.Router();
 notesRoutes.route("/").post(createNotes);
 
 notesRoutes.route("/:noteId").get(getNote);
+
+notesRoutes.route("/:noteId").put(updateNote);
